@@ -1,0 +1,95 @@
+yoniuni
+327337416
+
+Bricker:
+All inheritance and implementation is according to API. All strategies follow the decorator design, and all
+gameObjects inherit from GameObject
+
+brick_strategies:
+RemoveBrickStrategyDecorator:
+All strategies use decorator design to implement base RemoveBrickStrategy, and create the required
+objects/behavior in its own class by getting the parameters necessary in the constructor.
+
+abstract class from which all strategies inherit, to be used in decorator design.
+GameObjectCollection - returns the GameObjectCollection of the game
+onCollision - removes brick
+
+AddPaddleStrategy:
+onCollision - overrides father method to add a paddle
+
+ChangeCameraStrategy:
+uses composition by creating a BallCollisionCountdownAgent object to handle the collisions
+onCollision - overrides father method to change camera angle
+turnOffCameraChange - resets camera
+
+DoubleStrategy:
+Inherits RemoveBrickStrategyDecorator. Receives two strategies in its constructor to implement using the
+decorator design.
+onCollision - overrides father method to implement the two strategies from constructor
+
+PuckStrategy:
+onCollision - overrides father method to create pucks when brick is removed
+
+TimeChangeStrategy:
+Inherits RemoveBrickStrategyDecorator.
+onCollision - overrides father method and creates TimeChangers based on current state of game time
+update - overrides father method to remove object if out of bounds
+
+BrickStrategyFactory:
+getStrategy - returns a Collision Strategy and uses Random to return a random strategy. If the strategy is
+DoubleStrategy it recursively calls getStrategy in the constructor to get two random strategies.
+
+
+gameobjects:
+All gameobjects use and inheritance design and inherit from GameObject.
+Ball:
+onCollisionEnter - overrides father method and plays sound and increases counter and changes velocity.
+getCollisionCount  -returns collisioncount
+
+BallCollisionCountdownAgent:
+Inherits from GameObject. Uses Composition.A new one is constructed every time cameraChange is invoked. It
+saves the amount of collisions at time of construction and so can count 4 collisions and remove itself once
+camera is.
+
+FastTimeChanger/SlowTimeChanger:
+Inherit from GameObject. Slow/fast time on collision with paddle
+shouldCollideWith - makes sure collides only with paddle
+onCollision - changes time
+
+GraphicLifeCounter:
+Uses composition by saving a GameObjectCollection object to add and remove counters
+Constructor - creates the counters
+update - removes counters when life is lost
+
+NumericLifeCounter:
+Same as GraphicLifeCounter but presents the lives as a number.
+
+MockPaddle:
+onCollision - removes the paddle after collisions
+
+Paddle:
+update - recieves input from the user to move the paddle
+
+Puck:
+same as ball but not the main ball
+
+
+Algorithms:
+aLotStudyTime:
+Simple greedy algorithm. Sort both arrays and run through them matching the larest time slot to the largest
+task that will fit it this way leaving the smaller ones for the smaller tasks. total time n^2.
+
+minLeaps:
+use an inner and outer loop to fill in array soutions with the amount of jumps needed to get to place i in
+leapNum. solutions[n-1] will contain the result for a total time of n^2.
+
+numTrees:
+each tree will have root 1<= i <= n and so the left subtree will have i-1 nodes and the right subtree will
+have i+1 - n nodes, so we recursively find the amount for each subtree, for a total time of n^2. Calculate
+Catalan number.
+
+bucketWalk:
+for n liters the amount of ways is equal to the amount of ways to fill n-1 liters plus 1 for wach way,plus
+the amount of ways to fill n-2 liters plus 2 for each way. In other words we have a fibonacci sequence. Solve
+by saving the first 0, 1 and adding them until the n+1 number. Total time of n.
+
