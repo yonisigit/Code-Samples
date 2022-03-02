@@ -1,0 +1,24 @@
+yoniuni
+327337416
+
+Pixel to Char -
+First the brightness of the chars to be used is calculated by using CharRenderer.getImg, and using a private
+method getRatio to calculate the ratio of true to false in the boolean representation.
+Then the brightness levels are stretched as instructed.
+After the sub image size is calculated based on desired resolution, and achieved using
+image.squareSubImagesOfSize.
+The method getImageBrightness calculates the brightness level of each sub image by converting each pixel to
+greyscale brightness and dividing by the total pixels.
+Next the method getMatch matches the char to the sub Image by finding the char with the closest brightness
+level.
+Finally each sub Image is replaced with the matching char and the ascii art is rendered.
+
+Algorithms -
+1 -
+Saves each number in a HashSet. If the number is already in the HashSet that is the repeating number. So we go
+ over the array at most one time for a complexity of O(n).
+
+2 -
+First create a map with the morse translation of each letter. The method translate receives each word and
+translates it char by char, for a total time of O(s) as described. Finally each words is saved in a Hashmap,
+and the size of the Hashmap is returned all in O(1), for a total complexity of O(s).
