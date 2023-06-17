@@ -1,4 +1,4 @@
-# Code-Examples
+# Code Samples
 
 Examples from some of my projects:\
 Ascii Art - Converts a picture into ascii art. Written in Java.\
